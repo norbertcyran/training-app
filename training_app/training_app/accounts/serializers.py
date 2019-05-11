@@ -10,6 +10,7 @@ class UserSerializer(ModelSerializer):
 
 
 class RegisterSerializer(ModelSerializer):
+    """Serializer used for user registration."""
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password')
