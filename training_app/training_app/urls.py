@@ -20,13 +20,12 @@ from rest_framework import routers
 from .trainings import views
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
 router.register(r'muscle_groups', views.MuscleGroupViewSet)
 router.register(r'exercises', views.ExerciseViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/auth/', include('training_app.accounts.urls')),
     path('', include('training_app.frontend.urls'))
 ]

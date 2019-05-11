@@ -2,12 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework.viewsets import ModelViewSet
 
 from .models import MuscleGroup, Exercise
-from .serializers import UserSerializer, MuscleGroupSerializer, ExerciseSerializer
-
-
-class UserViewSet(ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+from .serializers import MuscleGroupSerializer, ExerciseSerializer
 
 
 class MuscleGroupViewSet(ModelViewSet):
