@@ -1,7 +1,7 @@
 from django.contrib.auth import login
 from knox.models import AuthToken
 from rest_framework.authtoken.serializers import AuthTokenSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.generics import GenericAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from knox.views import LoginView as KnoxLoginView
@@ -10,6 +10,7 @@ from .serializers import RegisterSerializer, UserSerializer
 
 
 class RegisterView(GenericAPIView):
+    """Register API view. """
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
@@ -23,7 +24,17 @@ class RegisterView(GenericAPIView):
 
 
 class LoginView(KnoxLoginView):
-    """Login API view."""
+    """
+    Login API view.
+
+    Creates authentication token when given correct credentials in POST data.
+    Token must be then passed in request's Authorization header.
+    """
+    permission_classes = (AllowAny, )
+
+    def get_user_serializer_class(self):
+        return UserSerializer
+
     def post(self, request, format=None):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -33,6 +44,8 @@ class LoginView(KnoxLoginView):
 
 
 class CurrentUserView(RetrieveAPIView):
+    """View returning response with serialized current logged in user.
+    If no user is logged in, or token is invalid, 401 status code is returned."""
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated, )
 
