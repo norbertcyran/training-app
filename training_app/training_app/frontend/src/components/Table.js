@@ -4,21 +4,18 @@ import key from "weak-key";
 
 const Table = ({data}) =>
     !data.length ? (
-        <p>Nothing to show</p>
+        <p>Loading data</p>
     ) : (
         <div className="column">
             <h2 className="subtitle">
-                Showing <strong>{data.length} items.</strong>
+                Showing {data.length} from {data.length} excercises.
             </h2>
-            <table className="table is-striped">
-                <thead>
-                <tr>
-                    {Object.entries(data[0]).map(el => <th key={key(el)}>{el[0]}</th> )}
-                </tr>
-                </thead>
+            <table>
                 <tbody>
                 {data.map(el => (
                     <tr key={el.id}>
+                    {/* @TODO: replace hardcoded src by el.image and 'alt also' */}
+                        <td><img src="https://dummyimage.com/100x100/0010f0/cccccc&text=image+is+comming" alt="alttxt"></img></td>
                         {Object.entries(el).map(el => <td key={key(el)}>{el[1]}</td>)}
                     </tr>
                 ))}
