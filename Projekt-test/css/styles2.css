@@ -1,0 +1,48 @@
+/*General*/
+body{
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing:1px;
+  text-transform: uppercase;
+  padding-bottom: 70px;
+}
+h1{
+   text-shadow: 1px 1px white;
+  color: white;
+  margin: 30px 10px;
+}
+h2{
+   text-shadow: 1px 1px white;
+  color: white;
+  padding: 30px 10px;
+}
+p{
+   text-shadow: 1px 1px white;
+  color: white;
+    padding: 15px 10px;
+    margin: 0px 15px;
+}
+img{
+  border-radius: 100%;
+}
+/*ID*/
+#Wstep{
+  text-align: center;
+  padding-top: 50px;
+}
+/*Class*/
+.kolumna1{
+  text-align: center;
+  border-radius: 80%;
+margin: 50px 0px;
+
+}
+.kolumna2{
+text-align: center;
+margin: 50px 0px;
+}
