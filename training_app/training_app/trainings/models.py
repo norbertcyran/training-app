@@ -57,16 +57,26 @@ class Workout(models.Model):
                                 verbose_name=_('Comments to the workout'))
 
 
-class ExerciseSet(models.Model):
-    """Class representing single set in a workout."""
-    workout = models.ForeignKey(Workout, related_name='sets', on_delete=models.CASCADE)
+class WorkoutExercise(models.Model):
+    """Class representing single exercise in a workout."""
+    workout = models.ForeignKey(Workout, related_name='exercises', on_delete=models.CASCADE)
 
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+
+
+class Set(models.Model):
+    """Class representing single set in a workout."""
+    workout_exercise = models.ForeignKey(WorkoutExercise, on_delete=models.CASCADE,
+                                         related_name='sets')
 
     repetitions = models.IntegerField(verbose_name=_('Repetitions'))
 
     weight = models.DecimalField(verbose_name=_('Weight'), decimal_places=2,
                                  max_digits=6)
+
+    @property
+    def exercise(self):
+        return self.workout_exercise.exercise
 
     def __str__(self):
         return f'{self.exercise} - {self.repetitions} x {self.weight} kg.'
