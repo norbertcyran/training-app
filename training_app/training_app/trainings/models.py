@@ -26,11 +26,17 @@ class Exercise(models.Model):
                                    verbose_name=_('Exercise description'),
                                    help_text=_('Instructions on how to perform an exercise'))
 
-    muscles_involved = models.ManyToManyField(MuscleGroup,
-                                              related_name='exercises',
-                                              verbose_name=_('Muscles involved'))
+    primary_muscles = models.ManyToManyField(MuscleGroup,
+                                             related_name='exercises',
+                                             verbose_name=_('Primary muscles involved'))
 
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    secondary_muscles = models.ManyToManyField(MuscleGroup,
+                                               verbose_name=_('Secondary muscles involved'),
+                                               related_name='secondary')
+
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='exercises')
+
+    timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.name
