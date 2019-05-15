@@ -43,3 +43,28 @@ class Exercise(models.Model):
 
     class Meta:
         ordering = ('name', )
+
+
+class Workout(models.Model):
+    """Class representing single workout."""
+    user = models.ForeignKey(User, related_name='workouts', on_delete=models.CASCADE)
+
+    date = models.DateField()
+
+    comments = models.TextField(max_length=200,
+                                verbose_name=_('Comments to the workout'))
+
+
+class ExerciseSet(models.Model):
+    """Class representing single set in a workout."""
+    workout = models.ForeignKey(Workout, related_name='sets', on_delete=models.CASCADE)
+
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+
+    repetitions = models.IntegerField(verbose_name=_('Repetitions'))
+
+    weight = models.DecimalField(verbose_name=_('Weight'), decimal_places=2,
+                                 max_digits=6)
+
+    def __str__(self):
+        return f'{self.exercise} - {self.repetitions} x {self.weight} kg.'
