@@ -34,6 +34,8 @@ class Exercise(models.Model):
                                                verbose_name=_('Secondary muscles involved'),
                                                related_name='secondary')
 
+    image = models.ImageField(verbose_name=_('Exercise image'), null=True)
+
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='exercises')
 
     timestamp = models.DateTimeField(auto_now_add=True, null=True)
