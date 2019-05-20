@@ -1,54 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        body {
-            background: #e5e5e5;
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-size: 18px;
-        }
-        td:nth-child(2) {
-            display: none;
-        }
-        td:nth-child(2),
-        td:last-child {
-            display: none;
-        }
-        tr:hover {
-            background-color: #cccccc;
-            text-decoration: none;
-            box-shadow: 0 0 5px 0 rgba(0,0,0,.3);
-            cursor: pointer;
-            transition: all 250ms cubic-bezier(.4,0,.2,1);
-        }
-        tr {
-            cursor: pointer;
-            background: #f4f4f4;
-            padding: 16px;
-            margin: 16px;
-            text-align: left;
-            vertical-align: top;
-        }
-        td {
-            padding: 16px;
-            border-bottom: 1px solid #ddd;
-        }
-        table {
-            empty-cells: hide;
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
-        .columns {
-            margin: 0 auto;
-            width: 1000px;
-        }
-        h2 {
-            margin: 20px auto;
-            width: 300px;
-        }
-    </style>
     <meta charset="UTF-8">
     <title>Training App</title>
 </head>
@@ -60,6 +12,7 @@
     </section>
 </body>
 
-{% load static %}
-<script src="{% static "frontend/main.js" %}"></script>
+{% load staticfiles %}
+<link rel="stylesheet" href='{% static "frontend/index.css" %}'>
+<script src='{% static "frontend/main.js" %}'></script>
 </html>
