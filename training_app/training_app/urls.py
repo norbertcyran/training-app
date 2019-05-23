@@ -13,10 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
+from . import settings
 from .trainings import views
 
 router = routers.DefaultRouter()
@@ -29,3 +31,6 @@ urlpatterns = [
     path('api/auth/', include('training_app.accounts.urls')),
     path('', include('training_app.frontend.urls'))
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
