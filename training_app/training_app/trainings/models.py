@@ -83,17 +83,28 @@ class WorkoutExercise(models.Model):
 
 class Set(models.Model):
     """Class representing single set in a workout."""
-    workout_exercise = models.ForeignKey(WorkoutExercise, on_delete=models.CASCADE,
-                                         related_name='sets')
+    workout_exercise = models.ForeignKey(
+        WorkoutExercise,
+        on_delete=models.CASCADE,
+        related_name='sets'
+    )
 
-    repetitions = models.IntegerField(verbose_name=_('Repetitions'))
+    reps = models.IntegerField(verbose_name=_('Repetitions'))
 
-    weight = models.DecimalField(verbose_name=_('Weight'), decimal_places=2,
-                                 max_digits=6)
+    weight = models.DecimalField(
+        verbose_name=_('Weight'),
+        decimal_places=2,
+        max_digits=6
+    )
+
+    order = models.IntegerField(verbose_name=_('Order'))
 
     @property
     def exercise(self):
         return self.workout_exercise.exercise
 
     def __str__(self):
-        return f'{self.exercise} - {self.repetitions} x {self.weight} kg.'
+        return f'{self.exercise} - {self.reps} x {self.weight} kg.'
+
+    class Meta:
+        ordering = ('order', )
