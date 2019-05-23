@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -16,29 +18,44 @@ class MuscleGroup(models.Model):
         ordering = ('name', )
 
 
+def exercise_image_upload(instance, filename):
+    return os.path.join('exercise-images', instance.id, filename)
+
+
 class Exercise(models.Model):
     """Model representing a single exercise. Base building block of the app."""
-    name = models.CharField(max_length=50,
-                            verbose_name=_('Exercise name'),
-                            help_text=_('Name of an exercise'))
+    name = models.CharField(
+        max_length=50,
+        verbose_name=_('Exercise name'),
+        help_text=_('Name of an exercise')
+    )
 
-    description = models.TextField(max_length=200,
-                                   verbose_name=_('Exercise description'),
-                                   help_text=_('Instructions on how to perform an exercise'))
+    description = models.TextField(
+        max_length=200,
+        verbose_name=_('Exercise description'),
+        help_text=_('Instructions on how to perform an exercise')
+    )
 
-    primary_muscles = models.ManyToManyField(MuscleGroup,
-                                             related_name='exercises',
-                                             verbose_name=_('Primary muscles involved'))
+    muscles_involved = models.ManyToManyField(
+        MuscleGroup,
+        related_name='exercises',
+        verbose_name=_('Muscles involved')
+    )
 
-    secondary_muscles = models.ManyToManyField(MuscleGroup,
-                                               verbose_name=_('Secondary muscles involved'),
-                                               related_name='secondary')
+    image = models.ImageField(
+        upload_to=exercise_image_upload,
+        verbose_name=_('Exercise image'),
+        null=True,
+        blank=True
+    )
 
-    image = models.ImageField(verbose_name=_('Exercise image'), null=True)
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='exercises'
+    )
 
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='exercises')
-
-    timestamp = models.DateTimeField(auto_now_add=True, null=True)
+    created = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.name
