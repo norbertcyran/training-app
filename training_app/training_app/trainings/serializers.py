@@ -7,7 +7,8 @@ from .models import Exercise, MuscleGroup, Set, WorkoutExercise, Workout
 class MuscleGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = MuscleGroup
-        fields = ('id', 'name')
+        fields = '__all__'
+        extra_kwargs = {'slug': {'read_only': True}}
 
 
 class ExerciseSerializer(serializers.ModelSerializer):

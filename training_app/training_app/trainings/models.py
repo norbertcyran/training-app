@@ -2,6 +2,7 @@ import os
 
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -11,8 +12,15 @@ class MuscleGroup(models.Model):
                             verbose_name=_('Name'),
                             help_text=_('Name of a muscle group'))
 
+    slug = models.SlugField(unique=True)
+
     def __str__(self):
         return self.name
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.slug = slugify(self.name)
+        super().save(force_insert, force_update, using, update_fields)
 
     class Meta:
         ordering = ('name', )
