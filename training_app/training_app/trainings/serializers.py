@@ -13,6 +13,12 @@ class MuscleGroupSerializer(serializers.ModelSerializer):
 
 class ExerciseSerializer(serializers.ModelSerializer):
     """Serializer for Exercise model."""
+    muscles_involved = serializers.SlugRelatedField(
+        slug_field='slug',
+        queryset=MuscleGroup.objects.all(),
+        many=True
+    )
+
     class Meta:
         model = Exercise
         fields = '__all__'
