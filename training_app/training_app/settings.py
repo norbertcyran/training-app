@@ -48,7 +48,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'knox.auth.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication'
-    )
+    ),
+    'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S%z'
 }
 
 MIDDLEWARE = [
