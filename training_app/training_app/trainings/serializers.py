@@ -1,7 +1,7 @@
 """Serializers for models."""
 from rest_framework import serializers
 
-from .models import Exercise, MuscleGroup, Set, WorkoutExercise
+from .models import Exercise, MuscleGroup, Set, WorkoutExercise, Workout
 
 
 class MuscleGroupSerializer(serializers.ModelSerializer):
@@ -41,3 +41,12 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
             Set.objects.create(workout_exercise=workout_exercise, **set_obj)
 
         return workout_exercise
+
+
+class WorkoutSerializer(serializers.ModelSerializer):
+    """Serializer for Workout model."""
+    user = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = Workout
+        fields = ('id', 'user', 'date', 'comments', 'exercises')
