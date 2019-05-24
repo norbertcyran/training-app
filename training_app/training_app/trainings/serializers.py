@@ -19,6 +19,8 @@ class ExerciseSerializer(serializers.ModelSerializer):
         many=True
     )
 
+    created_by = serializers.ReadOnlyField(source='created_by.username')
+
     class Meta:
         model = Exercise
         fields = '__all__'

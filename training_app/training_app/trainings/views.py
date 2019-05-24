@@ -14,6 +14,10 @@ class MuscleGroupViewSet(ModelViewSet):
 class ExerciseViewSet(ModelViewSet):
     queryset = Exercise.objects.all()
     serializer_class = ExerciseSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
 
 
 class WorkoutViewSet(ModelViewSet):
