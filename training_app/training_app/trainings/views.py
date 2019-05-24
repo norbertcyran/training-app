@@ -1,8 +1,9 @@
 from rest_framework import permissions
 from rest_framework.viewsets import ModelViewSet
 
-from .models import MuscleGroup, Exercise, Workout
-from .serializers import MuscleGroupSerializer, ExerciseSerializer, WorkoutSerializer
+from .models import MuscleGroup, Exercise, Workout, WorkoutExercise
+from .serializers import MuscleGroupSerializer, ExerciseSerializer, WorkoutSerializer, \
+    WorkoutExerciseSerializer
 
 
 class MuscleGroupViewSet(ModelViewSet):
@@ -24,3 +25,11 @@ class WorkoutViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class WorkoutExerciseViewSet(ModelViewSet):
+    serializer_class = WorkoutExerciseSerializer
+    permission_classes = (permissions.IsAuthenticated, )
+
+    def get_queryset(self):
+        return WorkoutExercise.objects.filter(workout=self.kwargs['workout_pk'])
