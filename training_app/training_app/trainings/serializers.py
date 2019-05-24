@@ -24,7 +24,7 @@ class SetSerializer(serializers.ModelSerializer):
         fields = ('reps', 'weight', 'order')
 
 
-class WorkoutExerciseSerializer(serializers.ModelSerializer):
+class WorkoutExerciseSerializer(serializers.HyperlinkedModelSerializer):
     """Serializer for WorkoutExercise model."""
     sets = SetSerializer(many=True)
 
@@ -43,9 +43,13 @@ class WorkoutExerciseSerializer(serializers.ModelSerializer):
         return workout_exercise
 
 
-class WorkoutSerializer(serializers.ModelSerializer):
+class WorkoutSerializer(serializers.HyperlinkedModelSerializer):
     """Serializer for Workout model."""
     user = serializers.ReadOnlyField(source='user.username')
+    exercises = serializers.HyperlinkedIdentityField(
+        view_name='workout-exercise-list',
+        lookup_url_kwarg='workout_pk'
+    )
 
     class Meta:
         model = Workout
