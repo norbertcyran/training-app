@@ -16,18 +16,13 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework import routers
 
 from . import settings
-from .trainings import views
-
-router = routers.DefaultRouter()
-router.register(r'muscle_groups', views.MuscleGroupViewSet)
-router.register(r'exercises', views.ExerciseViewSet)
+from .trainings.urls import urlpatterns as trainings_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('api/', include(trainings_urls)),
     path('api/auth/', include('training_app.accounts.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('', include('training_app.frontend.urls'))
