@@ -1,9 +1,11 @@
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 from knox.models import AuthToken
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.generics import GenericAPIView, RetrieveAPIView
 from rest_framework.response import Response
+from rest_framework import viewsets
 from knox.views import LoginView as KnoxLoginView
 
 from .serializers import RegisterSerializer, UserSerializer
@@ -51,3 +53,8 @@ class CurrentUserView(RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
