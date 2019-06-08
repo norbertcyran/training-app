@@ -16,7 +16,8 @@ class UserProfile(models.Model):
         User,
         related_name='profile',
         on_delete=models.CASCADE,
-        null=False
+        null=False,
+        primary_key=True
     )
 
     avatar = models.ImageField(
@@ -39,5 +40,6 @@ class UserProfile(models.Model):
         verbose_name=(_('Gender')),
         blank=False,
         null=True,
-        choices=GENDER_CHOICES
+        choices=GENDER_CHOICES,
+        max_length=1
     )
