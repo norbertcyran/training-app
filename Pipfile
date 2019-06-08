@@ -9,6 +9,8 @@ verify_ssl = true
 django = "*"
 django-rest-framework = "*"
 django-rest-knox = "*"
+pillow = "*"
+drf-nested-routers = "*"
 
 [requires]
 python_version = "3.7"
