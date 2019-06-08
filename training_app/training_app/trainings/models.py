@@ -8,9 +8,12 @@ from django.utils.translation import ugettext_lazy as _
 
 class MuscleGroup(models.Model):
     """Model representing muscle groups."""
-    name = models.CharField(max_length=50,
-                            verbose_name=_('Name'),
-                            help_text=_('Name of a muscle group'))
+    name = models.CharField(
+        max_length=50,
+        verbose_name=_('Name'),
+        help_text=_('Name of a muscle group'),
+        unique=True
+    )
 
     slug = models.SlugField(unique=True)
 
@@ -51,7 +54,7 @@ class Exercise(models.Model):
     )
 
     image = models.ImageField(
-        upload_to=exercise_image_upload,
+        upload_to='exercise-images',
         verbose_name=_('Exercise image'),
         null=True,
         blank=True

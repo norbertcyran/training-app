@@ -2,12 +2,14 @@ from django.contrib.auth.models import User
 from rest_framework.serializers import ModelSerializer
 from rest_framework.validators import UniqueValidator
 
+from .models import UserProfile
+
 
 class UserSerializer(ModelSerializer):
     """Serializer for User model."""
     class Meta:
         model = User
-        fields = ('id', 'username', 'email')
+        fields = ('id', 'username', 'email', 'profile')
 
 
 class RegisterSerializer(ModelSerializer):
@@ -32,5 +34,8 @@ class RegisterSerializer(ModelSerializer):
             validated_data['email'],
             validated_data['password']
         )
+
+        profile_data = validated_data.pop('profile')
+        UserProfile.objects.create(user=user, **profile_data)
 
         return user

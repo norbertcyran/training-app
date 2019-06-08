@@ -23,7 +23,8 @@ from .trainings.urls import urlpatterns as trainings_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(trainings_urls)),
-    path('api/auth/', include('training_app.accounts.urls')),
+    path('api/', include('training_app.accounts.urls')),
+    path('api/auth/', include('training_app.accounts.auth_urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('', include('training_app.frontend.urls'))
 ]
