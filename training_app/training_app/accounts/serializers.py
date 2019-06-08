@@ -5,8 +5,16 @@ from rest_framework.validators import UniqueValidator
 from .models import UserProfile
 
 
+class ProfileSerializer(ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('avatar', 'birthday', 'height', 'gender')
+
+
 class UserSerializer(ModelSerializer):
     """Serializer for User model."""
+    profile = ProfileSerializer()
+
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'profile')
