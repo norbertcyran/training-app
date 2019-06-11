@@ -7,6 +7,10 @@ from .serializers import MuscleGroupSerializer, ExerciseSerializer, WorkoutSeria
 
 
 class MuscleGroupViewSet(ModelViewSet):
+    """
+    list:
+    Return all existing muscle groups.
+    """
     queryset = MuscleGroup.objects.all()
     serializer_class = MuscleGroupSerializer
 
@@ -32,6 +36,26 @@ class WorkoutViewSet(ModelViewSet):
 
 
 class WorkoutExerciseViewSet(ModelViewSet):
+    """
+    list:
+    Return all exercises performed in the workout.
+
+    retrieve:
+    Return details of performed exercise.
+
+    create:
+    Add exercise to the workout. Sets have to JSON with schema
+    `{weight: float, reps: int, order: int}`.
+
+    update:
+    Update existing exercise with parameters as in create.
+
+    partial_update:
+    Update exercise only with given keys.
+
+    delete:
+    Delete the exercise from the workout.
+    """
     serializer_class = WorkoutExerciseSerializer
     permission_classes = (permissions.IsAuthenticated, )
 

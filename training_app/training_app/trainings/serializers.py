@@ -1,4 +1,5 @@
 """Serializers for models."""
+from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
 from .models import Exercise, MuscleGroup, Set, WorkoutExercise, Workout
@@ -16,7 +17,8 @@ class ExerciseSerializer(serializers.ModelSerializer):
     muscles_involved = serializers.SlugRelatedField(
         slug_field='slug',
         queryset=MuscleGroup.objects.all(),
-        many=True
+        many=True,
+        help_text=_('Muscles involved in the exercise (use slugs)')
     )
 
     created_by = serializers.ReadOnlyField(source='created_by.username')

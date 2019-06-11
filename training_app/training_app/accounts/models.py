@@ -24,13 +24,15 @@ class UserProfile(models.Model):
         upload_to='user-avatars',
         verbose_name=_('Profile picture'),
         null=True,
-        blank=True
+        blank=True,
+        help_text=_("User's profile picture")
     )
 
-    birthday = models.DateField(verbose_name=_('Date of birth'))
+    birthday = models.DateField(verbose_name=_('Date of birth'), help_text=_('Date of birth'))
 
     height = models.IntegerField(
         verbose_name=_('Height (cm)'),
+        help_text=_('Height (cm)'),
         blank=False,
         null=True,
         validators=[MinValueValidator(100), MaxValueValidator(250)]
@@ -38,6 +40,7 @@ class UserProfile(models.Model):
 
     gender = models.CharField(
         verbose_name=(_('Gender')),
+        help_text=_('Gender (M/F)'),
         blank=False,
         null=True,
         choices=GENDER_CHOICES,
