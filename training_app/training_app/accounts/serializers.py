@@ -22,9 +22,11 @@ class UserSerializer(ModelSerializer):
 
 class RegisterSerializer(ModelSerializer):
     """Serializer used for user registration."""
+    profile = ProfileSerializer(required=False)
+
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'email', 'password', 'profile')
         extra_kwargs = {
             'password': {'write_only': True},
             'email': {
