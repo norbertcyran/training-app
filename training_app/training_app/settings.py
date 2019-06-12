@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'knox',
     'training_app.trainings',
     'training_app.frontend',
-    'training_app.accounts'
+    'training_app.accounts',
+    'training_app.stats'
 ]
 
 REST_FRAMEWORK = {

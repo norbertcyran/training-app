@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
 from rest_framework.validators import UniqueValidator
 
@@ -6,9 +7,19 @@ from .models import UserProfile
 
 
 class ProfileSerializer(ModelSerializer):
+    weight_entries = serializers.HyperlinkedIdentityField(
+        view_name='user-weight-entry-list',
+        lookup_url_kwarg='user_pk'
+    )
+    exercise_entries = serializers.HyperlinkedIdentityField(
+        view_name='user-exercise-entry-list',
+        lookup_url_kwarg='user_pk'
+    )
+
     class Meta:
         model = UserProfile
-        fields = ('avatar', 'birthday', 'height', 'gender')
+        fields = ('avatar', 'birthday', 'height', 'weight', 'gender',
+                  'weight_entries', 'exercise_entries')
 
 
 class UserSerializer(ModelSerializer):

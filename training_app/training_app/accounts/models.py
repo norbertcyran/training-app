@@ -3,6 +3,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from ..stats.models import WeightEntry
+
 
 class UserProfile(models.Model):
     MALE = 'M'
@@ -46,3 +48,7 @@ class UserProfile(models.Model):
         choices=GENDER_CHOICES,
         max_length=1
     )
+
+    @property
+    def weight(self):
+        return WeightEntry.objects.filter(user=self.user).last().weight

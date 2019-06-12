@@ -25,6 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(trainings_urls)),
     path('api/', include('training_app.accounts.urls')),
+    path('api/', include('training_app.stats.urls')),
     path('api/auth/', include('training_app.accounts.auth_urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('docs/', include_docs_urls('Workout manager API')),
