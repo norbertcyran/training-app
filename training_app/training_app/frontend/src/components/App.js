@@ -21,7 +21,7 @@ class App extends React.Component {
   }
 }
 
-const wrapper = document.getElementById("app");
+const wrapper = document.getElementById("root");
 
 wrapper ? ReactDOM.render(<App />, wrapper) : null;
 
