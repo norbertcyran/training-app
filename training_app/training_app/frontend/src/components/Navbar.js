@@ -1,5 +1,6 @@
 import React from "react";
-
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import "../styles.css";
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-bottom">
@@ -14,36 +15,26 @@ const Navbar = () => {
       >
         <span className="navbar-toggler-icon" />
       </button>
-      <a className="navbar-brand" href="#">
+      <a className="navbar-brand" href="/Profil">
         <span className="badge badge-secondary">NPNG</span> 🐗
       </a>
 
       <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
           <li className="nav-item active">
-            <a className="nav-link" href="/Profil">
+            <Link className="nav-link" to="/profil">
               Profil <span className="sr-only">(current)</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a className="nav-link" href="/Treninigi">
-              Treningi <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li className="nav-item active">
-            <a className="nav-link" href="/Cwiczenia">
+            <Link className="nav-link" to="/cwiczenia">
               Ćwiczenia<span class="sr-only">(current)</span>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a className="nav-link" href="/Onas">
-              O nas
-            </a>
-          </li>
-          <li className="nav-item active">
-            <a className="nav-link" href="/Kontakt">
-              Kontakt
-            </a>
+            <Link className="nav-link" to="/dodaj">
+              Dodaj Ćwiczenie<span class="sr-only">(current)</span>
+            </Link>
           </li>
         </ul>
       </div>
