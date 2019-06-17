@@ -1,13 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import DataProvider from './DataProvider';
-import Table from './Table';
+import React from "react";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import Home from "./Home";
+import Profil from "./Profil";
+import Addex from "./Addex";
 
-const App = () => (
-    <DataProvider endpoint="api/exercises/"
-                  render={data => <Table data={data}/>} />
-);
-
-const wrapper = document.getElementById("app");
-
-wrapper ? ReactDOM.render(<App/>, wrapper) : null;
+class App extends React.Component {
+  render() {
+    return (
+      <Router>
+        <div className="container">
+          <Route exact path="/" component={Home} />
+          <Route path="/Profil" component={Profil} />
+          <Route path="/Dodaj" component={Addex} />
+        </div>
+      </Router>
+    );
+  }
+}
+export default App;
