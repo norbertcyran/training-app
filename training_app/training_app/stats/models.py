@@ -42,3 +42,5 @@ class ExerciseScoreEntry(models.Model):
         max_digits=5,
         help_text=_('Weight lifted'),
     )
+
+    date = models.DateField(auto_now_add=True)
