@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import Home from "./Home";
 import Profil from "./Profil";
@@ -17,4 +18,7 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+
+const wrapper = document.getElementById("root");
+
+wrapper ? ReactDOM.render(<App />, wrapper) : null;
