@@ -6,6 +6,7 @@ class Login extends React.Component {
     email: "",
     remind: false
   };
+
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };

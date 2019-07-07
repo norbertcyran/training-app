@@ -11,6 +11,11 @@ django-rest-framework = "*"
 django-rest-knox = "*"
 pillow = "*"
 drf-nested-routers = "*"
+coreapi = "*"
+pygments = "*"
+markdown = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.7"

@@ -2,7 +2,7 @@ import React from "react";
 import Login from "./Login";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import Register from "./Register";
-import "../styles.css";
+import "./styles.css";
 class Home extends React.Component {
   state = {};
   render() {

@@ -11,7 +11,7 @@ class MuscleGroup(models.Model):
     name = models.CharField(
         max_length=50,
         verbose_name=_('Name'),
-        help_text=_('Name of a muscle group'),
+        help_text=_('Name of the muscle group'),
         unique=True
     )
 
@@ -38,24 +38,26 @@ class Exercise(models.Model):
     name = models.CharField(
         max_length=50,
         verbose_name=_('Exercise name'),
-        help_text=_('Name of an exercise')
+        help_text=_('Name of the exercise')
     )
 
     description = models.TextField(
         max_length=200,
         verbose_name=_('Exercise description'),
-        help_text=_('Instructions on how to perform an exercise')
+        help_text=_('Instructions on how to perform the exercise')
     )
 
     muscles_involved = models.ManyToManyField(
         MuscleGroup,
         related_name='exercises',
-        verbose_name=_('Muscles involved')
+        verbose_name=_('Muscles involved'),
+        help_text=_('Muscles involved in the exercise')
     )
 
     image = models.ImageField(
         upload_to='exercise-images',
         verbose_name=_('Exercise image'),
+        help_text=_('Illustrative image of the exercise'),
         null=True,
         blank=True
     )
@@ -79,17 +81,30 @@ class Workout(models.Model):
     """Class representing single workout."""
     user = models.ForeignKey(User, related_name='workouts', on_delete=models.CASCADE)
 
-    date = models.DateField()
+    date = models.DateField(help_text=_('Date when the workout was performed'))
 
-    comments = models.TextField(max_length=200,
-                                verbose_name=_('Comments to the workout'))
+    comments = models.TextField(
+        max_length=200,
+        verbose_name=_('Comments to the workout'),
+        help_text=_('Comments to the workout')
+    )
 
 
 class WorkoutExercise(models.Model):
     """Class representing single exercise in a workout."""
-    workout = models.ForeignKey(Workout, related_name='exercises', on_delete=models.CASCADE)
+    workout = models.ForeignKey(
+        Workout,
+        related_name='exercises',
+        on_delete=models.CASCADE,
+        help_text=_('Workout which the exercise is part of')
+    )
 
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    exercise = models.ForeignKey(
+        Exercise,
+        on_delete=models.CASCADE,
+        verbose_name=_('Exercise'),
+        help_text=_('Exercise')
+    )
 
 
 class Set(models.Model):

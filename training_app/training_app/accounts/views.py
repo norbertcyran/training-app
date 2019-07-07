@@ -12,7 +12,7 @@ from .serializers import RegisterSerializer, UserSerializer
 
 
 class RegisterView(GenericAPIView):
-    """Register API view. """
+    """Register API view."""
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
@@ -40,13 +40,11 @@ class LoginView(KnoxLoginView):
     def post(self, request, format=None):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        login(request, user)
         return super(LoginView, self).post(request, format)
 
 
 class CurrentUserView(RetrieveAPIView):
-    """View returning response with serialized current logged in user.
+    """Return response with serialized currently logged in user.
     If no user is logged in, or token is invalid, 401 status code is returned."""
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated, )
@@ -56,5 +54,12 @@ class CurrentUserView(RetrieveAPIView):
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    retrieve:
+    Return the given user.
+
+    list:
+    Return the list of all existing users.
+    """
     serializer_class = UserSerializer
     queryset = User.objects.all()

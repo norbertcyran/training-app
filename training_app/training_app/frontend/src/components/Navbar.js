@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import "../styles.css";
+import "./styles.css";
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-bottom">
@@ -27,7 +27,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item active">
-            <Link className="nav-link" to="/cwiczenia">
+            <Link className="nav-link" to="/Przegladaj">
               Ćwiczenia<span class="sr-only">(current)</span>
             </Link>
           </li>
